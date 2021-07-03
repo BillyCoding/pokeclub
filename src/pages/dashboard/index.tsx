@@ -1,6 +1,6 @@
 import React from 'react';
 import Scrollbars from 'react-custom-scrollbars-2';
-import {LogoText} from '../../components/LogoText';
+import {Header} from '../../components/Header';
 import {Container} from './styles';
 
 const Dashboard = () => {
@@ -8,7 +8,7 @@ const Dashboard = () => {
     <>
       {/* <Scrollbars> */}
         <Container>
-          <LogoText />
+          <Header />
         </Container>
       {/* </Scrollbars> */}
     </>

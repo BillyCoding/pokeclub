@@ -18,6 +18,7 @@ export default createGlobalStyle`
   :root {
     --primary: #5E1F70;
     --secondary: #90659C;
+    --description: #BBBBBB;
     --primary-gradient: linear-gradient(#5E1F70, #000);
     --background-color: linear-gradient(#1B1B1B, #000);
 }
