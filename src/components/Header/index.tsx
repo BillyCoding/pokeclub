@@ -11,14 +11,17 @@ import {
 import {Link, useHistory} from 'react-router-dom';
 import {LogoText} from '../LogoText';
 
+interface IHeader {
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+}
 interface IRenderRoutes {
   pathname: string;
   title: string;
 }
 
-export const Header = () => {
+export const Header = ({search, setSearch}: IHeader) => {
   const history = useHistory();
-  const [search, setSearch] = useState('');
 
   const RenderRouter = ({pathname, title}: IRenderRoutes) => {
     const RouteColor = (pathname: string) => {

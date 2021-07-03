@@ -15,3 +15,10 @@ export const PokemonsContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+export const SearchTitle = styled.h1`
+  color: #fff;
+  font-weight: 550;
+  font-size: 20px;
+  margin: 8px;
+`;

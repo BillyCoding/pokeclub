@@ -6,7 +6,8 @@ const Router = () => {
 
   return (
     <Switch>
-      <Route path="/" component={Dashboard} />
+      <Route path="/" exact component={Dashboard} />
+      <Route path="/comparar" exact component={Dashboard} />
     </Switch>
   );
 };
