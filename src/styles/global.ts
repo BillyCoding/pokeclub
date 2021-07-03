@@ -13,14 +13,22 @@ export default createGlobalStyle`
   *, button, input {
     border: 0;
     outline: 0;
-    font-family: 'Product Sans Regular';
+    font-family: 'Poppins';
   }
   :root {
     --primary: #5E1F70;
     --secondary: #90659C;
     --description: #BBBBBB;
-    --primary-gradient: #5E1F70;
-    --background-color:  #1b1b1b;
+    --primary-gradient: linear-gradient(
+        170deg,
+        #5E1F70,
+        #000 80%
+      );
+    --background-color:  linear-gradient(
+        170deg,
+        #1b1b1b,
+        #000 80%
+      );
 }
 
 .Overlay {

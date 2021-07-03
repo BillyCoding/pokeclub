@@ -1,13 +1,22 @@
 import React from 'react';
 import {useEffect} from 'react';
-import {IPokemonInfos, TypePokemon} from '../../../store/ducks/pokemons/types';
-import {CardContainer, PokemonName} from './styles';
+import {IPokemonInfos} from '../../../store/ducks/pokemons/types';
+import {
+  CardContainer,
+  PokemonName,
+  PokemonImage,
+  Row,
+  PokemonStats,
+  DefenseIcon,
+  AttackIcon,
+  SpeedIcon,
+  PokemonTypes,
+} from './styles';
 import {useState} from 'react';
 
 interface ICardPokemon {
   url: string;
 }
-
 
 export const CardPokemon = ({url}: ICardPokemon) => {
   const [pokemonInfos, setPokemonInfos] = useState<IPokemonInfos>();
@@ -20,9 +29,44 @@ export const CardPokemon = ({url}: ICardPokemon) => {
       .then((data: IPokemonInfos) => setPokemonInfos(data));
   }, [url]);
 
+  const GetStats = (stats: string) =>
+    pokemonInfos?.stats.find((s) => s.stat.name === stats)?.base_stat;
+
+  const types = pokemonInfos?.types.map((t) => t.type.name);
+
+  const typesString = types ? types.join(' • ') : '';
+
+  const gradients = [
+    ['#bd19d6', '#ea7d10'],
+    ['#ff2121', '#25c668'],
+  ];
+
   return (
     <CardContainer>
+      <PokemonStats style={{textAlign: 'right', width: '100%'}}>
+        {GetStats('hp')} HP
+      </PokemonStats>
+      <PokemonImage
+        style={{
+          backgroundImage: `url("https://pokeres.bastionbot.org/images/pokemon/${pokemonInfos?.id}.png")`,
+        }}
+      />
       <PokemonName>{pokemonInfos?.name}</PokemonName>
+      <Row style={{width: '90%'}}>
+        <Row>
+          <SpeedIcon />
+          <PokemonStats>{GetStats('speed')}</PokemonStats>
+        </Row>
+        <Row>
+          <AttackIcon />
+          <PokemonStats>{GetStats('attack')}</PokemonStats>
+        </Row>
+        <Row>
+          <DefenseIcon />
+          <PokemonStats>{GetStats('defense')}</PokemonStats>
+        </Row>
+      </Row>
+      <PokemonTypes>{typesString}</PokemonTypes>
     </CardContainer>
   );
 };

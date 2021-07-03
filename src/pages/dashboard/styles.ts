@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: var(--background-color);
+  background: var(--background-color);
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 80px auto;

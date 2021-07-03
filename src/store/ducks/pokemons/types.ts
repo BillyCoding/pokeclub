@@ -39,7 +39,7 @@ export interface IPokemonInfos {
     front_default: string;
   };
   stats: IPokemonStats[];
-  types: any[];
+  types: IPokemonTypes[];
   weight: number;
 }
 
@@ -48,6 +48,15 @@ interface IPokemonStats {
   effort: number;
 
   stat: {
+    name: string;
+    url: string;
+  };
+}
+
+interface IPokemonTypes {
+  slot: number;
+
+  type: {
     name: string;
     url: string;
   };
