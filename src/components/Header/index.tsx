@@ -11,18 +11,25 @@ import {
 import {Link, useHistory} from 'react-router-dom';
 import {LogoText} from '../LogoText';
 
+interface IRenderRoutes {
+  pathname: string;
+  title: string;
+}
+
 export const Header = () => {
   const history = useHistory();
   const [search, setSearch] = useState('');
 
-  const RenderRouter = (pathname: string, title: string) => {
+  const RenderRouter = ({pathname, title}: IRenderRoutes) => {
     const RouteColor = (pathname: string) => {
       return pathname === history.location.pathname
         ? 'var(--primary)'
         : 'var(--description)';
     };
     return (
-      <Link to={pathname} style={{height: 40, alignItems: 'center', display: 'flex'}}>
+      <Link
+        to={pathname}
+        style={{height: 40, alignItems: 'center', display: 'flex'}}>
         <HeaderNav style={{color: RouteColor(pathname)}}>{title}</HeaderNav>
       </Link>
     );
@@ -37,7 +44,13 @@ export const Header = () => {
     <Container>
       <HeaderDiv>
         <LogoText />
-        {headerRoutes.map((item) => RenderRouter(item.pathname, item.title))}
+        {headerRoutes.map((item, index) => (
+          <RenderRouter
+            pathname={item.pathname}
+            title={item.title}
+            key={index}
+          />
+        ))}
       </HeaderDiv>
       <HeaderDiv>
         <SearchContainer>

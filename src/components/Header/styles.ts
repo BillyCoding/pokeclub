@@ -9,7 +9,7 @@ export const Container = styled.div`
   border-bottom: 1.37px solid #e9e9e9;
   background-color: white;
   z-index: 999;
-  height: 96px;
+  height: 80px;
   align-items: center;
   justify-content: space-between;
   position: fixed;

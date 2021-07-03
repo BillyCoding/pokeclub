@@ -19,8 +19,8 @@ export default createGlobalStyle`
     --primary: #5E1F70;
     --secondary: #90659C;
     --description: #BBBBBB;
-    --primary-gradient: linear-gradient(#5E1F70, #000);
-    --background-color: linear-gradient(#1B1B1B, #000);
+    --primary-gradient: #5E1F70;
+    --background-color:  #1b1b1b;
 }
 
 .Overlay {
