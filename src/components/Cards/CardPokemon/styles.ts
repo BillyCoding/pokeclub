@@ -21,6 +21,9 @@ export const CardContainer = styled.div`
 
   :hover {
     opacity: 1;
+    span {
+      transform: scale(1.05);
+    };
   }
 `;
 
@@ -36,7 +39,9 @@ export const PokemonImage = styled.span`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  transform: scale(0.95);
   justify-content: space-between;
+  transition: transform 0.2s ease-out;
 `;
 
 export const PokemonName = styled.h1`

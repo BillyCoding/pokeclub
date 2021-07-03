@@ -10,11 +10,15 @@ import {CardPokemon} from '../../components/Cards/CardPokemon';
 import {Container, Row, Col} from 'react-grid-system';
 import {useDebounce} from 'use-debounce';
 import {IPokemonInfos} from '../../store/ducks/pokemons/types';
+import {PaginationOptions} from '../../components/PaginationOptions';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(16);
   const [searchText] = useDebounce(search, 600);
+  const [currentPage] = useDebounce(page, 150);
 
   const [searchResult, setSearchResult] = useState<IPokemonInfos>();
   const [loadingSearch, setLoadingSearch] = useState(false);
@@ -43,12 +47,10 @@ const Dashboard = () => {
     }
   }, [searchText]);
 
-  const page = 10;
-  const limit = 8;
 
   useEffect(() => {
-    dispatch(GetPokemons({page, limit}));
-  }, []);
+    dispatch(GetPokemons({page: currentPage, limit}));
+  }, [currentPage, limit]);
 
   const ListPokemons: any[] = loading ? [...Array(limit)] : pokemons;
 
@@ -58,7 +60,7 @@ const Dashboard = () => {
         <Header search={search} setSearch={setSearch} />
 
         <PokemonsContainer>
-          <Scrollbars>
+          <Scrollbars style={{display: 'flex'}}>
             <Container fluid style={{padding: 48, paddingTop: 24}}>
               {search.length > 0 && (
                 <SearchTitle>Resultados para "{search}"</SearchTitle>
@@ -87,6 +89,9 @@ const Dashboard = () => {
                 )}
               </Row>
             </Container>
+            {search.length === 0 && (
+              <PaginationOptions page={page} setPage={setPage} />
+            )}
           </Scrollbars>
         </PokemonsContainer>
       </DashboardContainer>

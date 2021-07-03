@@ -65,15 +65,15 @@ export const CardPokemon = ({url = '', value, skeleton}: ICardPokemon) => {
       />
       <PokemonName>{pokemonInfos?.name || '-'}</PokemonName>
       <Row style={{width: '90%'}}>
-        <Row>
+        <Row title={'Speed'}>
           <SpeedIcon />
           <PokemonStats>{GetStats('speed')}</PokemonStats>
         </Row>
-        <Row>
+        <Row title={'Attack'}>
           <AttackIcon />
           <PokemonStats>{GetStats('attack')}</PokemonStats>
         </Row>
-        <Row>
+        <Row title={'Defense'}>
           <DefenseIcon />
           <PokemonStats>{GetStats('defense')}</PokemonStats>
         </Row>
