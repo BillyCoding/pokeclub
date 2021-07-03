@@ -2,11 +2,13 @@ import api from '../../../services/api';
 import {put, call} from 'redux-saga/effects';
 import {GetPokemonsSuccess, GetPokemonsFailure} from './actions';
 
-export function* getPokemons() {
+export function* getPokemons({payload}: any) {
+  const {page, limit} = payload;
   try {
     const {data} = yield call(api.get, '/', {
       params: {
-        limit: 4,
+        limit,
+        offset: limit * (page - 1),
       },
     });
 

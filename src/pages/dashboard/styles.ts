@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const DashboardContainer = styled.div`
   width: 100vw;
   height: 100vh;
   background: var(--background-color);
@@ -13,6 +13,5 @@ export const Container = styled.div`
 export const PokemonsContainer = styled.div`
   grid-area: M;
   display: flex;
-  padding: 24px 32px;
   justify-content: center;
 `;

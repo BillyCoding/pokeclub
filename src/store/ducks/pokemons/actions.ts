@@ -1,8 +1,8 @@
 import {Types} from './types';
 import {action} from 'typesafe-actions';
 
-export const GetPokemons = () => {
-  return action(Types.GET_POKEMONS, {});
+export const GetPokemons = ({page = 1, limit = 12}) => {
+  return action(Types.GET_POKEMONS, {page, limit});
 };
 
 export const GetPokemonsSuccess = (pokemons: any[]) => {

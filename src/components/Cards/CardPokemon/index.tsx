@@ -16,17 +16,24 @@ import {useState} from 'react';
 
 interface ICardPokemon {
   url: string;
+  skeleton?: boolean;
 }
 
-export const CardPokemon = ({url}: ICardPokemon) => {
+export const CardPokemon = ({url = '', skeleton}: ICardPokemon) => {
   const [pokemonInfos, setPokemonInfos] = useState<IPokemonInfos>();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     fetch(url, {
       method: 'GET',
     })
       .then((res) => res.json())
-      .then((data: IPokemonInfos) => setPokemonInfos(data));
+      .then((data: IPokemonInfos) => {
+        setPokemonInfos(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, [url]);
 
   const GetStats = (stats: string) =>
@@ -41,7 +48,7 @@ export const CardPokemon = ({url}: ICardPokemon) => {
     ['#ff2121', '#25c668'],
   ];
 
-  return (
+  return !skeleton && !loading ? (
     <CardContainer>
       <PokemonStats style={{textAlign: 'right', width: '100%'}}>
         {GetStats('hp')} HP
@@ -68,5 +75,9 @@ export const CardPokemon = ({url}: ICardPokemon) => {
       </Row>
       <PokemonTypes>{typesString}</PokemonTypes>
     </CardContainer>
+  ) : (
+    <CardContainer
+      style={{background: 'var(--background-color)', cursor: 'default'}}
+    />
   );
 };

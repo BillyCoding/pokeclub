@@ -21,12 +21,17 @@ export default createGlobalStyle`
     --description: #BBBBBB;
     --primary-gradient: linear-gradient(
         170deg,
-        #5E1F70,
+        var(--primary),
+        #000 80%
+      );
+      --secondary-gradient: linear-gradient(
+        170deg,
+        var(--secondary),
         #000 80%
       );
     --background-color:  linear-gradient(
         170deg,
-        #1b1b1b,
+        #340342,
         #000 80%
       );
 }

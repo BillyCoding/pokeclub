@@ -6,6 +6,8 @@ export const Types = {
 
 export interface TypesPokemons {
   data: TypePokemon[];
+  loading: boolean;
+  error: boolean;
 }
 
 export interface TypePokemon {

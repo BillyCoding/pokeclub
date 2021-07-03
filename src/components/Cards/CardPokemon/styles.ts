@@ -16,13 +16,15 @@ export const CardContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   box-shadow: 5px 10px 35px rgba(0, 0, 0, 0.6);
+  opacity: 0.9;
+  transition: opacity 0.5s ease-out;
 
   :hover {
-    opacity: 0.95;
+    opacity: 1;
   }
 `;
 
-export const PokemonImage = styled.div`
+export const PokemonImage = styled.span`
   width: 240px;
   height: 240px;
   border-top-left-radius: 5px;
