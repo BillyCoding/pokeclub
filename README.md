@@ -1,9 +1,12 @@
 <h1 align="center">
+<a href="https://pokeclub.vercel.app/">
 <img  src="https://i.ibb.co/nLrfgXB/thumbnail.png" width="800"/>
+</a>
 </h1>
 <br />
 
 <!-- <p style="font-size: 18px; font-weight: bold; margin: 4px 0">Sobre o projeto</p> -->
+
 ### Sobre o projeto
 
 Este modelo foi realizado para demonstrar como utilizar o Frontend com ReactJs fazendo requisições com uma API Rest.
@@ -20,7 +23,6 @@ Antes de seguirmos para as configurações e uso do projeto, é ideal que você 
 
 1. Para instalar e utilizar o projeto é bem simples, basta baixar o projeto no computador com o ambiente configurado e executar o comando "yarn" para instalar as bibliotecas.
 
-
 2. Em seguida é só executar o comando a seguir para iniciar o projeto:
 
 ```
@@ -28,7 +30,6 @@ yarn start
 ```
 
 Com isso o projeto já estará funcionando pronto para testes.
-
 
 <details style="margin:8px 0">
 <summary style="font-size: 18px; font-weight: bold; margin: 4px 0">Feito com</summary>
@@ -45,8 +46,6 @@ AS tecnologias usadas para fazer essa template:
 
 </section>
 </details>
-
-
 
 <details style="margin:8px 0">
 
@@ -84,10 +83,9 @@ YourApp
 ├── package.json
 └── tsconfig.json
 ```
+
 </section>
 </details>
-
-
 
 <details style="margin:8px 0">
 <summary style="font-size: 18px; font-weight: bold; margin: 4px 0">Edição</summary>
@@ -134,8 +132,8 @@ Nesta seção haverão instruções caso você queira editar o template, explica
 </section>
 </details>
 
-
 <!-- <p style="font-size: 18px; font-weight: bold; margin: 4px 0">Licença</p> -->
+
 ### Licença
 
 Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
