@@ -8,7 +8,6 @@ const Router = () => {
   return (
     <Switch>
       <Route path="/" exact component={Dashboard} />
-      <Route path="/comparar" exact component={Dashboard} />
       <Route path="/pokemon/:pokemonId" exact component={Pokemon} />
     </Switch>
   );

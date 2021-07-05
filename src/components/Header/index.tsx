@@ -39,8 +39,7 @@ export const Header = ({search, setSearch}: IHeader) => {
   };
 
   const headerRoutes = [
-    {pathname: '/', title: 'Dashboard'},
-    {pathname: '/comparar', title: 'Comparar'},
+    {pathname: '/', title: 'Dashboard'}
   ];
 
   return (
