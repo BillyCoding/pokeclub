@@ -45,7 +45,7 @@ export interface IPokemonInfos {
   weight: number;
 }
 
-interface IPokemonStats {
+export interface IPokemonStats {
   base_stat: number;
   effort: number;
 

@@ -13,14 +13,25 @@ import {
   PokemonTypes,
 } from './styles';
 import {useState} from 'react';
+import { Link } from 'react-router-dom';
 
 interface ICardPokemon {
   url?: string;
   value?: IPokemonInfos;
   skeleton?: boolean;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  setSearchResult: React.Dispatch<
+    React.SetStateAction<IPokemonInfos | undefined>
+  >;
 }
 
-export const CardPokemon = ({url = '', value, skeleton}: ICardPokemon) => {
+export const CardPokemon = ({
+  url = '',
+  value,
+  skeleton,
+  setSearch,
+  setSearchResult,
+}: ICardPokemon) => {
   const [pokemonInfos, setPokemonInfos] = useState<IPokemonInfos>();
   const [loading, setLoading] = useState(false);
 
@@ -54,32 +65,34 @@ export const CardPokemon = ({url = '', value, skeleton}: ICardPokemon) => {
     : `url("https://s2.coinmarketcap.com/static/img/coins/200x200/8303.png")`;
 
   return !skeleton && !loading ? (
-    <CardContainer>
-      <PokemonStats style={{textAlign: 'right', width: '100%'}}>
-        {GetStats('hp')} HP
-      </PokemonStats>
-      <PokemonImage
-        style={{
-          backgroundImage: pokemonPhoto,
-        }}
-      />
-      <PokemonName>{pokemonInfos?.name || '-'}</PokemonName>
-      <Row style={{width: '90%'}}>
-        <Row title={'Speed'}>
-          <SpeedIcon />
-          <PokemonStats>{GetStats('speed')}</PokemonStats>
+    <Link to={`/pokemon/${pokemonInfos?.name}`}>
+      <CardContainer>
+        <PokemonStats style={{textAlign: 'right', width: '100%'}}>
+          {GetStats('hp')} HP
+        </PokemonStats>
+        <PokemonImage
+          style={{
+            backgroundImage: pokemonPhoto,
+          }}
+        />
+        <PokemonName>{pokemonInfos?.name || '-'}</PokemonName>
+        <Row style={{width: '90%'}}>
+          <Row title={'Speed'}>
+            <SpeedIcon />
+            <PokemonStats>{GetStats('speed')}</PokemonStats>
+          </Row>
+          <Row title={'Attack'}>
+            <AttackIcon />
+            <PokemonStats>{GetStats('attack')}</PokemonStats>
+          </Row>
+          <Row title={'Defense'}>
+            <DefenseIcon />
+            <PokemonStats>{GetStats('defense')}</PokemonStats>
+          </Row>
         </Row>
-        <Row title={'Attack'}>
-          <AttackIcon />
-          <PokemonStats>{GetStats('attack')}</PokemonStats>
-        </Row>
-        <Row title={'Defense'}>
-          <DefenseIcon />
-          <PokemonStats>{GetStats('defense')}</PokemonStats>
-        </Row>
-      </Row>
-      <PokemonTypes>{typesString}</PokemonTypes>
-    </CardContainer>
+        <PokemonTypes>{typesString}</PokemonTypes>
+      </CardContainer>
+    </Link>
   ) : (
     <CardContainer
       style={{background: 'var(--background-color)', cursor: 'default'}}

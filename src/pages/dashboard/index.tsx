@@ -35,7 +35,6 @@ const Dashboard = () => {
       })
         .then((res) => res.json())
         .then((data: IPokemonInfos) => {
-          console.log(data);
           setSearchResult(data);
           setLoadingSearch(false);
         })
@@ -46,7 +45,6 @@ const Dashboard = () => {
         });
     }
   }, [searchText]);
-
 
   useEffect(() => {
     dispatch(GetPokemons({page: currentPage, limit}));
@@ -62,9 +60,6 @@ const Dashboard = () => {
         <PokemonsContainer>
           <Scrollbars style={{display: 'flex'}}>
             <Container fluid style={{padding: 48, paddingTop: 24}}>
-              {search.length > 0 && (
-                <SearchTitle>Resultados para "{search}"</SearchTitle>
-              )}
               <Row>
                 {search.length === 0 ? (
                   ListPokemons.map((item, index) => (
@@ -76,6 +71,8 @@ const Dashboard = () => {
                       <CardPokemon
                         url={loading ? '' : item?.url}
                         skeleton={loading}
+                        setSearch={setSearch}
+                        setSearchResult={setSearchResult}
                       />
                     </Col>
                   ))
@@ -84,7 +81,12 @@ const Dashboard = () => {
                     xs={12}
                     md={3}
                     style={{display: 'flex', justifyContent: 'center'}}>
-                    <CardPokemon value={searchResult} skeleton={loading} />
+                    <CardPokemon
+                      setSearch={setSearch}
+                      value={searchResult}
+                      skeleton={loading}
+                      setSearchResult={setSearchResult}
+                    />
                   </Col>
                 )}
               </Row>
