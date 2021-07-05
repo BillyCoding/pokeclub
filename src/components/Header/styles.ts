@@ -59,6 +59,7 @@ export const SearchContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin: 0 32px;
   background-color: white;
   border: 1px solid #cbcbcb;
   z-index: 1;
@@ -84,4 +85,18 @@ export const SearchIcon = styled(FiSearch)`
   width: 24px;
   height: 24px;
   color: var(--description);
+`;
+
+export const UserName = styled.h1`
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 29px;
+  color: var(--primary);
+  transition: color 0.15s ease-in;
+  cursor: pointer;
+
+  :hover {
+    color: var(--secondary);
+  }
 `;

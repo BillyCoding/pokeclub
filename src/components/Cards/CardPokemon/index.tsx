@@ -14,16 +14,27 @@ import {
 } from './styles';
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
+import api from '../../../services/api';
+import { useSelector } from 'react-redux';
+import { AppStore } from '../../../store/types';
 
 interface ICardPokemon {
-  url?: string;
+  pokemonId?: string;
   value?: IPokemonInfos;
   skeleton?: boolean;
 }
 
-export const CardPokemon = ({url = '', value, skeleton}: ICardPokemon) => {
+export const CardPokemon = ({
+  pokemonId = '',
+  value,
+  skeleton,
+}: ICardPokemon) => {
   const [pokemonInfos, setPokemonInfos] = useState<IPokemonInfos>();
   const [loading, setLoading] = useState(false);
+
+  const {
+    user: {data: {token}}
+  } = useSelector((state: AppStore) => state);
 
   useEffect(() => {
     if (value) {
@@ -31,17 +42,24 @@ export const CardPokemon = ({url = '', value, skeleton}: ICardPokemon) => {
       console.log(value);
     } else {
       setLoading(true);
-      fetch(url, {
-        method: 'GET',
-      })
-        .then((res) => res.json())
-        .then((data: IPokemonInfos) => {
-          setPokemonInfos(data);
+      if (pokemonId.length > 1) {
+        api
+        .get(`/pokemon/${pokemonId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setPokemonInfos(res.data);
           setLoading(false);
         })
-        .catch(() => setLoading(false));
+        .catch((err) => {
+          setLoading(false);
+          console.log('Error:', err);
+        });
+      }
     }
-  }, [url, value]);
+  }, [pokemonId, value]);
 
   const GetStats = (stats: string) =>
     pokemonInfos?.stats.find((s) => s.stat.name === stats)?.base_stat || '-';
@@ -50,19 +68,15 @@ export const CardPokemon = ({url = '', value, skeleton}: ICardPokemon) => {
 
   const typesString = types ? types.join(' • ') : '- • -';
 
-  const pokemonPhoto = pokemonInfos?.id
-    ? `url("https://pokeres.bastionbot.org/images/pokemon/${pokemonInfos?.id}.png")`
-    : `url("https://s2.coinmarketcap.com/static/img/coins/200x200/8303.png")`;
-
   return !skeleton && !loading ? (
-    <Link to={`/pokemon/${pokemonInfos?.name}`}>
+    <Link to={`/pokemon/${pokemonId}`}>
       <CardContainer>
         <PokemonStats style={{textAlign: 'right', width: '100%'}}>
           {GetStats('hp')} HP
         </PokemonStats>
         <PokemonImage
           style={{
-            backgroundImage: pokemonPhoto,
+            backgroundImage: `url(${pokemonInfos?.photo})`,
           }}
         />
         <PokemonName>{pokemonInfos?.name || '-'}</PokemonName>

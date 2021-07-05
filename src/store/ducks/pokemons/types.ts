@@ -16,33 +16,13 @@ export interface TypePokemon {
 }
 
 export interface IPokemonInfos {
-  abilities: any[];
-  base_experience: number;
-  forms: any[];
-  game_indices: any[];
-  height: number;
-  held_items: any[];
   id: number;
-  is_default: true;
-  location_area_encounters: string;
-  moves: any[];
   name: string;
-  order: number;
-  past_types: [];
-  species: {
-    name: string;
-    url: string;
-  };
-  sprites: {
-    back_default: string;
-    back_female: null;
-    back_shiny: string;
-    back_shiny_female: null;
-    front_default: string;
-  };
   stats: IPokemonStats[];
   types: IPokemonTypes[];
-  weight: number;
+  base_experience: number;
+  abilities: any[];
+  photo: string;
 }
 
 export interface IPokemonStats {

@@ -11,6 +11,7 @@ import {Container, Row, Col} from 'react-grid-system';
 import {useDebounce} from 'use-debounce';
 import {IPokemonInfos} from '../../store/ducks/pokemons/types';
 import {PaginationOptions} from '../../components/PaginationOptions';
+import api from '../../services/api';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -25,17 +26,22 @@ const Dashboard = () => {
 
   const {
     pokemons: {data: pokemons, loading},
+    user: {
+      data: {token},
+    },
   } = useSelector((state: AppStore) => state);
 
   useEffect(() => {
     if (searchText.length > 1) {
       setLoadingSearch(true);
-      fetch(`https://pokeapi.co/api/v2/pokemon/${searchText}`, {
-        method: 'GET',
-      })
-        .then((res) => res.json())
-        .then((data: IPokemonInfos) => {
-          setSearchResult(data);
+      api
+        .get(`/pokemon/${searchText}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setSearchResult(res.data);
           setLoadingSearch(false);
         })
         .catch((err) => {
@@ -68,10 +74,7 @@ const Dashboard = () => {
                       xs={12}
                       md={3}
                       style={{display: 'flex', justifyContent: 'center'}}>
-                      <CardPokemon
-                        url={loading ? '' : item?.url}
-                        skeleton={loading}
-                      />
+                      <CardPokemon pokemonId={item} skeleton={loading} />
                     </Col>
                   ))
                 ) : (

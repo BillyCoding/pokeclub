@@ -20,7 +20,7 @@ export const LogoText = ({
       Poke
       <span
         style={{
-          color: 'var(--secondary)',
+          opacity: 0.7,
           fontWeight: 400,
         }}>
         club

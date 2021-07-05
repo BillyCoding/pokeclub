@@ -13,6 +13,9 @@ import {Container, Row, Col} from 'react-grid-system';
 import {IPokemonInfos} from '../../store/ducks/pokemons/types';
 import {useParams} from 'react-router-dom';
 import {PokemonStats} from '../../components/PokemonStats';
+import api from '../../services/api';
+import { useSelector } from 'react-redux';
+import { AppStore } from '../../store/types';
 
 interface RouteParams {
   pokemonId: string;
@@ -24,16 +27,23 @@ const Pokemon = () => {
   const [pokemon, setPokemon] = useState<IPokemonInfos>();
   const [loading, setLoading] = useState(false);
 
+  const {
+    user: {data: {token}}
+  } = useSelector((state: AppStore) => state);
+
   useEffect(() => {
     if (pokemonId) {
       setLoading(true);
-      fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`, {
-        method: 'GET',
-      })
-        .then((res) => res.json())
-        .then((data: IPokemonInfos) => {
+
+        api
+        .get(`/pokemon/${pokemonId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
           console.log('\x1b[32mGET POKEMON', pokemonId);
-          setPokemon(data);
+          setPokemon(res.data);
           setLoading(false);
         })
         .catch((err) => {
@@ -44,11 +54,6 @@ const Pokemon = () => {
         });
     }
   }, [pokemonId]);
-
-  const pokemonPhoto = pokemon?.id
-    ? `url("https://pokeres.bastionbot.org/images/pokemon/${pokemon?.id}.png")`
-    : `url("https://s2.coinmarketcap.com/static/img/coins/200x200/8303.png")`;
-
   return (
     <>
       <DashboardContainer>
@@ -63,7 +68,7 @@ const Pokemon = () => {
             <div style={{display: 'flex', alignItems: 'center', marginTop: 48}}>
               <PokemonImage
                 style={{
-                  backgroundImage: pokemonPhoto,
+                  backgroundImage:  `url(${pokemon?.photo})`,
                 }}
               />
               <PokemonStats pokemonStats={pokemon?.stats} />

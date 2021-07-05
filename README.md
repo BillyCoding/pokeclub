@@ -1,5 +1,5 @@
 <h1 align="center">
-<img  src="https://i.ibb.co/nLrfgXB/thumbnail.png" width="800"/>
+<img  src="https://i.ibb.co/GkqJcN8/Login.png" width="800"/>
 </h1>
 <br />
 
@@ -8,7 +8,9 @@
 
 Este modelo foi realizado para demonstrar como utilizar o Frontend com ReactJs fazendo requisições com uma API Rest.
 
-Para esta demonstração utilizei a API pública de pokemons [PokeAPI](https://pokeapi.co/docs/v2).
+O projeto conta com login utilizando authenticação JWT, todas as rotas de pesquisa de pokemons são protegidas.
+
+Para esta demonstração utilizei a API do Pokeclub criada especialmente para este projeto [PokeClubAPI](https://github.com/BillyCoding/pokeclub-api).
 
 ### Pré-requisitos
 

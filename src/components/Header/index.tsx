@@ -7,9 +7,13 @@ import {
   SearchBox,
   SearchContainer,
   SearchIcon,
+  UserName,
 } from './styles';
 import {Link, useHistory} from 'react-router-dom';
 import {LogoText} from '../LogoText';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppStore} from '../../store/types';
+import {UserLogout} from '../../store/ducks/users/actions';
 
 interface IHeader {
   search: string;
@@ -22,6 +26,13 @@ interface IRenderRoutes {
 
 export const Header = ({search, setSearch}: IHeader) => {
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const {
+    user: {
+      data: {user},
+    },
+  } = useSelector((state: AppStore) => state);
 
   const RenderRouter = ({pathname, title}: IRenderRoutes) => {
     const RouteColor = (pathname: string) => {
@@ -38,9 +49,11 @@ export const Header = ({search, setSearch}: IHeader) => {
     );
   };
 
-  const headerRoutes = [
-    {pathname: '/', title: 'Dashboard'}
-  ];
+  const headerRoutes = [{pathname: '/', title: 'Dashboard'}];
+
+  const handleLogout = () => {
+    dispatch(UserLogout());
+  };
 
   return (
     <Container>
@@ -63,6 +76,9 @@ export const Header = ({search, setSearch}: IHeader) => {
             placeholder="Pesquisar pokemons"
           />
         </SearchContainer>
+        <UserName title={'Sair'} onClick={handleLogout}>
+          {user.name}
+        </UserName>
       </HeaderDiv>
     </Container>
   );

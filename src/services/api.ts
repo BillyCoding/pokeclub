@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const baseURL = 'https://pokeapi.co/api/v2/pokemon';
+export const baseURL = 'http://localhost:3333';
 
 const api = axios.create({
   baseURL,
