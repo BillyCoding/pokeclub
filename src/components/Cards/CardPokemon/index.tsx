@@ -13,25 +13,15 @@ import {
   PokemonTypes,
 } from './styles';
 import {useState} from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 interface ICardPokemon {
   url?: string;
   value?: IPokemonInfos;
   skeleton?: boolean;
-  setSearch: React.Dispatch<React.SetStateAction<string>>;
-  setSearchResult: React.Dispatch<
-    React.SetStateAction<IPokemonInfos | undefined>
-  >;
 }
 
-export const CardPokemon = ({
-  url = '',
-  value,
-  skeleton,
-  setSearch,
-  setSearchResult,
-}: ICardPokemon) => {
+export const CardPokemon = ({url = '', value, skeleton}: ICardPokemon) => {
   const [pokemonInfos, setPokemonInfos] = useState<IPokemonInfos>();
   const [loading, setLoading] = useState(false);
 

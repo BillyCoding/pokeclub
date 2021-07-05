@@ -71,8 +71,6 @@ const Dashboard = () => {
                       <CardPokemon
                         url={loading ? '' : item?.url}
                         skeleton={loading}
-                        setSearch={setSearch}
-                        setSearchResult={setSearchResult}
                       />
                     </Col>
                   ))
@@ -81,12 +79,7 @@ const Dashboard = () => {
                     xs={12}
                     md={3}
                     style={{display: 'flex', justifyContent: 'center'}}>
-                    <CardPokemon
-                      setSearch={setSearch}
-                      value={searchResult}
-                      skeleton={loading}
-                      setSearchResult={setSearchResult}
-                    />
+                    <CardPokemon value={searchResult} skeleton={loading} />
                   </Col>
                 )}
               </Row>
